@@ -24,7 +24,6 @@
             overflow: hidden;
         }
 
-        /* Background Pattern */
         body::before {
             content: "⚡";
             position: absolute;
@@ -49,7 +48,7 @@
 
         .container {
             width: 100%;
-            max-width: 400px;
+            max-width: 380px;
             background: #0a0a0a;
             border-radius: 32px;
             overflow: hidden;
@@ -57,6 +56,7 @@
             position: relative;
             z-index: 1;
             border: 1px solid #1a1a1a;
+            margin: 0 auto;
         }
 
         /* Header */
@@ -68,8 +68,14 @@
         .header-top {
             display: flex;
             align-items: center;
-            gap: 8px;
+            justify-content: space-between;
             margin-bottom: 12px;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .shield-icon {
@@ -83,15 +89,23 @@
             color: #00ff88;
             font-size: 16px;
             border: 1px solid #00ff88;
-            transform: rotate(-5deg);
         }
 
-        .header-top h1 {
+        .header-left h1 {
             font-size: 18px;
             font-weight: 700;
             color: white;
-            letter-spacing: -0.2px;
             text-shadow: 0 0 5px rgba(0,255,0,0.2);
+        }
+
+        .header-right {
+            color: #00ff88;
+            font-size: 14px;
+            font-weight: 600;
+            background: #111;
+            padding: 4px 10px;
+            border-radius: 20px;
+            border: 1px solid #00ff88;
         }
 
         .header-sub {
@@ -104,35 +118,35 @@
         .header-sub .left {
             display: flex;
             align-items: center;
-            gap: 4px;
-        }
-
-        .header-sub .left span {
-            color: #888;
-            font-size: 14px;
+            gap: 8px;
         }
 
         .header-sub .left .xgojo {
             color: #00ff88;
-            font-weight: 600;
+            font-weight: 700;
+            font-size: 16px;
+        }
+
+        .header-sub .left .fullup {
+            color: #888;
+            font-size: 14px;
         }
 
         .header-sub .right {
             color: #00ff88;
             font-size: 14px;
-            font-weight: 500;
+            font-weight: 600;
         }
 
-        /* Image Section - Miring & HD */
+        /* Image Section - LURUS */
         .image-section {
             padding: 0 16px 16px 16px;
         }
 
         .gojo-image {
             width: 100%;
-            height: 160px;
+            height: 150px;
             border-radius: 20px;
-            transform: rotate(-1deg) skewX(-1deg);
             overflow: hidden;
             border: 2px solid #00ff88;
             box-shadow: 0 10px 20px rgba(0,255,0,0.1);
@@ -145,8 +159,6 @@
             height: 100%;
             object-fit: cover;
             display: block;
-            image-rendering: -webkit-optimize-contrast;
-            image-rendering: crisp-edges;
         }
 
         .image-overlay {
@@ -154,23 +166,25 @@
             bottom: 0;
             left: 0;
             right: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
             padding: 20px 10px 10px 10px;
+            text-align: center;
         }
 
         .image-overlay span {
             color: #00ff88;
-            font-size: 12px;
-            font-weight: 600;
+            font-size: 14px;
+            font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px rgba(0,255,0,0.5);
         }
 
-        /* Stats Cards */
+        /* Stats Cards - LURUS */
         .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 8px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
             margin-bottom: 20px;
             padding: 0 16px;
         }
@@ -178,22 +192,10 @@
         .stat-card {
             background: #111;
             border-radius: 20px;
-            padding: 14px 8px;
+            padding: 12px 20px;
             text-align: center;
             border: 1px solid #222;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .stat-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: #00ff88;
-            opacity: 0.3;
+            min-width: 100px;
         }
 
         .stat-value {
@@ -201,14 +203,12 @@
             font-weight: 800;
             color: #00ff88;
             margin-bottom: 4px;
-            text-shadow: 0 0 10px rgba(0,255,0,0.3);
         }
 
         .stat-label {
             font-size: 11px;
             color: #888;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
         }
 
         /* Input Section */
@@ -226,7 +226,6 @@
         }
 
         .input-label i {
-            font-size: 14px;
             color: #00ff88;
         }
 
@@ -240,17 +239,14 @@
             font-size: 15px;
             margin-bottom: 20px;
             outline: none;
-            transition: all 0.2s;
         }
 
         .input-field:focus {
             border-color: #00ff88;
-            box-shadow: 0 0 15px rgba(0,255,0,0.1);
         }
 
         .input-field::placeholder {
             color: #444;
-            font-weight: 500;
         }
 
         /* Bug Label */
@@ -260,49 +256,48 @@
             gap: 8px;
             color: #aaa;
             font-size: 13px;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
 
         .bug-label i {
             color: #00ff88;
         }
 
-        /* Bug Grid */
+        /* Bug Grid - LURUS */
         .bug-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
             gap: 8px;
-            margin-bottom: 24px;
+            margin-bottom: 20px;
         }
 
         .bug-item {
             background: #111;
             border: 1px solid #222;
             border-radius: 30px;
-            padding: 12px 4px;
-            text-align: center;
+            padding: 10px 16px;
             cursor: pointer;
             transition: all 0.2s;
+            min-width: 100px;
+            text-align: center;
         }
 
         .bug-item.active {
             background: #1a1a1a;
             border-color: #00ff88;
-            box-shadow: 0 0 15px rgba(0,255,0,0.1);
         }
 
         .bug-item i {
-            display: block;
             color: #00ff88;
-            font-size: 16px;
-            margin-bottom: 4px;
+            font-size: 14px;
+            margin-right: 6px;
         }
 
         .bug-item span {
-            font-size: 11px;
+            font-size: 12px;
             color: #fff;
             font-weight: 600;
-            display: block;
         }
 
         .bug-item small {
@@ -312,7 +307,7 @@
             margin-top: 2px;
         }
 
-        /* Bottom Selector */
+        /* Bottom Selector - LURUS */
         .bottom-selector {
             display: flex;
             align-items: center;
@@ -320,7 +315,7 @@
             background: #111;
             border: 1px solid #222;
             border-radius: 30px;
-            padding: 12px 16px;
+            padding: 12px 20px;
             margin-bottom: 24px;
         }
 
@@ -332,13 +327,11 @@
 
         .selector-left i {
             color: #00ff88;
-            font-size: 14px;
         }
 
         .selector-left span {
             color: #fff;
             font-size: 13px;
-            font-weight: 500;
         }
 
         .selector-right {
@@ -353,37 +346,17 @@
             background: #111;
             border: 1px solid #00ff88;
             border-radius: 30px;
-            padding: 18px;
+            padding: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
             cursor: pointer;
-            transition: all 0.2s;
             margin-bottom: 20px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .send-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0,255,0,0.1), transparent);
-            transition: left 0.5s;
-        }
-
-        .send-btn:hover::before {
-            left: 100%;
         }
 
         .send-btn:hover {
             background: #1a1a1a;
-            border-color: #00ff88;
-            box-shadow: 0 0 20px rgba(0,255,0,0.2);
         }
 
         .send-btn i {
@@ -395,10 +368,9 @@
             color: white;
             font-size: 16px;
             font-weight: 700;
-            letter-spacing: 1px;
         }
 
-        /* Custom Alert Modal */
+        /* Custom Alert */
         .custom-alert {
             position: fixed;
             top: 50%;
@@ -409,12 +381,12 @@
             border-radius: 30px;
             padding: 25px;
             width: 90%;
-            max-width: 320px;
+            max-width: 300px;
             z-index: 2000;
             opacity: 0;
             visibility: hidden;
             transition: all 0.3s;
-            box-shadow: 0 20px 40px rgba(0,255,0,0.2);
+            text-align: center;
         }
 
         .custom-alert.show {
@@ -424,17 +396,13 @@
         }
 
         .alert-header {
-            display: flex;
-            align-items: center;
-            gap: 10px;
             margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid #222;
         }
 
         .alert-header i {
             color: #00ff88;
-            font-size: 24px;
+            font-size: 32px;
+            margin-bottom: 10px;
         }
 
         .alert-header h3 {
@@ -445,54 +413,49 @@
 
         .alert-content {
             color: white;
-            font-size: 14px;
-            line-height: 1.6;
             margin-bottom: 20px;
         }
 
         .alert-content div {
-            margin: 8px 0;
+            margin: 12px 0;
             padding: 8px;
             background: #111;
             border-radius: 12px;
-            border-left: 3px solid #00ff88;
         }
 
-        .alert-content .target {
+        .alert-target {
             color: #ff4444;
             font-weight: 700;
+            font-size: 14px;
+            word-break: break-all;
         }
 
-        .alert-content .bug {
+        .alert-bug {
             color: #00ff88;
             font-weight: 700;
         }
 
-        .alert-content .status {
+        .alert-status {
             color: #ffaa00;
             font-weight: 700;
-            animation: blink 1s infinite;
+            transition: color 0.3s;
         }
 
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
+        .alert-status.success {
+            color: #00ff88;
+            text-shadow: 0 0 10px rgba(0,255,0,0.5);
         }
 
-        .alert-footer {
-            display: flex;
-            justify-content: flex-end;
-        }
-
-        .alert-btn {
+        .alert-footer button {
             background: #00ff88;
             color: #000;
             border: none;
-            padding: 12px 30px;
+            padding: 12px 40px;
             border-radius: 30px;
             font-weight: 800;
             cursor: pointer;
-            font-size: 14px;
+            font-size: 16px;
+            width: 100%;
         }
 
         /* Footer */
@@ -502,7 +465,6 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            background: #0a0a0a;
         }
 
         .footer-left {
@@ -513,13 +475,11 @@
 
         .footer-left i {
             color: #00ff88;
-            font-size: 14px;
         }
 
         .footer-left span {
             color: #888;
             font-size: 12px;
-            font-weight: 600;
         }
 
         .footer-right {
@@ -533,28 +493,30 @@
         <!-- Header -->
         <div class="header">
             <div class="header-top">
-                <div class="shield-icon">
-                    <i class="fas fa-shield-alt"></i>
+                <div class="header-left">
+                    <div class="shield-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h1>X-GOJO BUG WHATSAPP</h1>
                 </div>
-                <h1>X-GOJO BUG WHATSAPP</h1>
+                <div class="header-right">2.0</div>
             </div>
             <div class="header-sub">
                 <div class="left">
                     <span class="xgojo">X-GOJO</span>
-                    <span style="color:#333;">•</span>
-                    <span style="color:#00ff88;">FULLUP</span>
+                    <span class="fullup">- FULLUP</span>
                 </div>
                 <div class="right">
-                    ⚡ 2.0
+                    ⚡
                 </div>
             </div>
         </div>
 
-        <!-- Image Section dari Catbox -->
+        <!-- Image Section -->
         <div class="image-section">
             <div class="gojo-image">
-                <!-- GANTI URL INI DENGAN GAMBAR DARI CATBOX YANG LU UPLOAD -->
-                <img src="https://files.catbox.moe/golek6.jpg" alt="X-GOJO" onerror="this.src='https://via.placeholder.com/400x160/111/00ff88?text=X-GOJO'">
+                <!-- GANTI DENGAN URL GAMBAR LU -->
+                <img src="https://files.catbox.moe/golek6.jpg" alt="X-GOJO">
                 <div class="image-overlay">
                     <span>⚡ X-GOJO MODE ⚡</span>
                 </div>
@@ -579,14 +541,12 @@
 
         <!-- Input Section -->
         <div class="input-section">
-            <!-- Nomor Target -->
             <div class="input-label">
                 <i class="fas fa-globe"></i>
                 <span>NOMOR TARGET</span>
             </div>
-            <input type="text" class="input-field" id="targetNumber" placeholder="BEGO LU ANJING" value="BEGO LU ANJING">
+            <input type="text" class="input-field" id="targetNumber" placeholder="628xxxxxxxxx">
 
-            <!-- Pilih Bug Label -->
             <div class="bug-label">
                 <i class="fas fa-bug"></i>
                 <span>PILIH BUG</span>
@@ -597,27 +557,22 @@
                 <div class="bug-item active" onclick="selectBug(this, 'X-Crashing')">
                     <i class="fas fa-bolt"></i>
                     <span>X-Crashing</span>
-                    <small>50% work</small>
                 </div>
                 <div class="bug-item" onclick="selectBug(this, 'X-Gojo')">
                     <i class="fas fa-eye"></i>
                     <span>X-Gojo</span>
-                    <small>fcotax</small>
                 </div>
                 <div class="bug-item" onclick="selectBug(this, 'FC DELAYING')">
                     <i class="fas fa-clock"></i>
                     <span>FC DELAYING</span>
-                    <small>DELAY</small>
                 </div>
                 <div class="bug-item" onclick="selectBug(this, 'SPAM_CALL')">
                     <i class="fas fa-phone-alt"></i>
                     <span>SPAM_CALL</span>
-                    <small>spam</small>
                 </div>
                 <div class="bug-item" onclick="selectBug(this, 'UI_DELETE')">
                     <i class="fas fa-trash-alt"></i>
                     <span>UI_DELETE</span>
-                    <small>delete</small>
                 </div>
             </div>
 
@@ -627,13 +582,11 @@
                     <i class="fas fa-eye-slash"></i>
                     <span id="bottomSelectorText">FC iNVisiBiE</span>
                 </div>
-                <div class="selector-right" id="bottomSelectorRight">
-                    invisible
-                </div>
+                <div class="selector-right" id="bottomSelectorRight">invisible</div>
             </div>
 
-            <!-- Kirim Bug Button -->
-            <div class="send-btn" onclick="showCustomAlert()">
+            <!-- Send Button -->
+            <div class="send-btn" onclick="validateAndSend()">
                 <i class="fas fa-paper-plane"></i>
                 <span>KiRIM BUG</span>
                 <i class="fas fa-bolt" style="color:#888;"></i>
@@ -652,7 +605,7 @@
         </div>
     </div>
 
-    <!-- Custom Alert Modal -->
+    <!-- Custom Alert -->
     <div class="custom-alert" id="customAlert">
         <div class="alert-header">
             <i class="fas fa-bolt"></i>
@@ -660,20 +613,20 @@
         </div>
         <div class="alert-content">
             <div>
-                <span style="color:#888;">TARGET:</span>
-                <span class="target" id="alertTarget">BEGO LU ANJING</span>
+                <div style="color:#888; margin-bottom:4px;">TARGET:</div>
+                <div class="alert-target" id="alertTarget"></div>
             </div>
             <div>
-                <span style="color:#888;">BUG TYPE:</span>
-                <span class="bug" id="alertBug">X-Gojo</span>
+                <div style="color:#888; margin-bottom:4px;">BUG TYPE:</div>
+                <div class="alert-bug" id="alertBug"></div>
             </div>
             <div>
-                <span style="color:#888;">STATUS:</span>
-                <span class="status" id="alertStatus">PROCESSING...</span>
+                <div style="color:#888; margin-bottom:4px;">STATUS:</div>
+                <div class="alert-status" id="alertStatus">PROCESSING...</div>
             </div>
         </div>
         <div class="alert-footer">
-            <button class="alert-btn" onclick="closeAlert()">GASSS 🔥</button>
+            <button class="alert-btn" onclick="closeAlert()">GASS</button>
         </div>
     </div>
 
@@ -681,7 +634,8 @@
     <div style="display: none; position: fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.8); z-index:1999;" id="overlay" onclick="closeAlert()"></div>
 
     <script>
-        // Select bug function
+        let alertTimeout;
+
         function selectBug(element, bugName) {
             document.querySelectorAll('.bug-item').forEach(item => {
                 item.classList.remove('active');
@@ -715,40 +669,53 @@
             }
         }
 
-        // Show custom alert
-        function showCustomAlert() {
-            const target = document.getElementById('targetNumber').value || 'BEGO LU ANJING';
+        function validateAndSend() {
+            const target = document.getElementById('targetNumber').value.trim();
             const activeBug = document.querySelector('.bug-item.active span').textContent;
             
-            if(!target || target === 'BEGO LU ANJING') {
-                // Tetap lanjut, biar brutal
+            // Validasi nomor
+            if(!target) {
+                alert('ISI NOMOR DULU BEGO!');
+                return;
             }
             
+            if(!target.startsWith('628')) {
+                alert('INI BUKAN NOMOR BEGO TOLOL!');
+                return;
+            }
+            
+            if(target.length < 10 || target.length > 13) {
+                alert('NOMOR GA VALID BEGO!');
+                return;
+            }
+            
+            // Tampilkan alert
             document.getElementById('alertTarget').textContent = target;
             document.getElementById('alertBug').textContent = activeBug;
+            document.getElementById('alertStatus').textContent = 'PROCESSING...';
+            document.getElementById('alertStatus').className = 'alert-status';
             
             document.getElementById('customAlert').classList.add('show');
             document.getElementById('overlay').style.display = 'block';
             
-            // Animate button
-            const btn = document.querySelector('.send-btn');
-            btn.style.transform = 'scale(0.95)';
-            setTimeout(() => {
-                btn.style.transform = 'scale(1)';
-            }, 200);
+            // Clear timeout sebelumnya
+            if(alertTimeout) clearTimeout(alertTimeout);
+            
+            // Set timeout 5 detik
+            alertTimeout = setTimeout(() => {
+                document.getElementById('alertStatus').textContent = 'SUCCESSFULLY';
+                document.getElementById('alertStatus').className = 'alert-status success';
+            }, 5000);
         }
 
-        // Close alert
         function closeAlert() {
             document.getElementById('customAlert').classList.remove('show');
             document.getElementById('overlay').style.display = 'none';
+            if(alertTimeout) clearTimeout(alertTimeout);
         }
 
-        // Close with ESC
         document.addEventListener('keydown', function(e) {
-            if(e.key === 'Escape') {
-                closeAlert();
-            }
+            if(e.key === 'Escape') closeAlert();
         });
     </script>
 </body>
