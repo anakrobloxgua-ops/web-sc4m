@@ -31,7 +31,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url('https://files.catbox.moe/e1qpn2.jpg'); /* GANTI DENGAN URL GAMBAR BACKGROUND */
+            background-image: url('https://files.catbox.moe/your-background-image.jpg');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -39,7 +39,6 @@
             z-index: -1;
         }
 
-        /* Pattern overlay */
         body::after {
             content: "";
             position: absolute;
@@ -142,6 +141,42 @@
             color: #00ff88;
             font-size: 14px;
             font-weight: 600;
+        }
+
+        /* Menu Swipe */
+        .menu-swipe {
+            display: flex;
+            padding: 0 16px 16px 16px;
+            gap: 8px;
+        }
+
+        .menu-item {
+            flex: 1;
+            text-align: center;
+            padding: 12px 8px;
+            background: rgba(17, 17, 17, 0.8);
+            backdrop-filter: blur(2px);
+            border: 1px solid #00ff88;
+            border-radius: 30px;
+            color: #fff;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .menu-item.active {
+            background: #00ff88;
+            color: #000;
+        }
+
+        .menu-item i {
+            margin-right: 6px;
+            color: #00ff88;
+        }
+
+        .menu-item.active i {
+            color: #000;
         }
 
         /* Video Section */
@@ -443,6 +478,7 @@
             color: #ff4444;
             font-weight: 700;
             font-size: 14px;
+            word-break: break-all;
         }
 
         .alert-bug {
@@ -513,7 +549,7 @@
                     <div class="shield-icon">
                         <i class="fas fa-shield-alt"></i>
                     </div>
-                    <h1>X-GOJO BUG WHATSAPP</h1>
+                    <h1 id="mainTitle">X-GOJO BUG WHATSAPP</h1>
                 </div>
                 <div class="header-right">2.0</div>
             </div>
@@ -528,15 +564,25 @@
             </div>
         </div>
 
+        <!-- Menu Swipe -->
+        <div class="menu-swipe">
+            <div class="menu-item active" onclick="switchMenu('whatsapp')" id="menuWhatsapp">
+                <i class="fab fa-whatsapp"></i> BUG WA
+            </div>
+            <div class="menu-item" onclick="switchMenu('group')" id="menuGroup">
+                <i class="fas fa-users"></i> BUG GROUP
+            </div>
+        </div>
+
         <!-- Video Section -->
         <div class="image-section">
             <div class="gojo-video">
-                <video autoplay muted loop playsinline>
+                <video autoplay loop muted playsinline id="bgVideo">
                     <source src="https://files.catbox.moe/hbvqqc.mp4" type="video/mp4">
                     <img src="https://files.catbox.moe/uk7d9e.jpg" alt="fallback">
                 </video>
                 <div class="video-overlay">
-                    <span>⚡ X-GOJO MODE ⚡</span>
+                    <span id="videoText">⚡ X-GOJO MODE ⚡</span>
                 </div>
             </div>
         </div>
@@ -545,7 +591,7 @@
         <div class="stats-grid">
             <div class="stat-card">
                 <div class="stat-value">11</div>
-                <div class="stat-label">TOTAL<br>BUGS</div>
+                <div class="stat-label">TOTAL BUGS</div>
             </div>
             <div class="stat-card">
                 <div class="stat-value">GACOR</div>
@@ -559,42 +605,60 @@
 
         <!-- Input Section -->
         <div class="input-section">
-            <div class="input-label">
+            <!-- Label Target (berubah) -->
+            <div class="input-label" id="targetLabel">
                 <i class="fas fa-globe"></i>
-                <span>NOMOR TARGET</span>
+                <span id="targetLabelText">NOMOR TARGET</span>
             </div>
-            <input type="text" class="input-field" id="targetNumber" placeholder="628XXXXXXXXXX">
+            <input type="text" class="input-field" id="targetInput" placeholder="628XXXXXXXXXX">
 
+            <!-- Bug Label -->
             <div class="bug-label">
                 <i class="fas fa-bug"></i>
                 <span>PILIH BUG</span>
             </div>
 
-            <!-- Bug Grid -->
-            <div class="bug-grid">
-                <div class="bug-item active" onclick="selectBug(this, 'X-Crashing')">
+            <!-- Bug Grid untuk WhatsApp -->
+            <div class="bug-grid" id="bugGridWhatsapp">
+                <div class="bug-item active" onclick="selectBug(this, 'X-Crashing', 'whatsapp')">
                     <i class="fas fa-bolt"></i>
                     <span>X-Crashing</span>
                 </div>
-                <div class="bug-item" onclick="selectBug(this, 'X-Gojo')">
+                <div class="bug-item" onclick="selectBug(this, 'X-Gojo', 'whatsapp')">
                     <i class="fas fa-eye"></i>
                     <span>X-Gojo</span>
                 </div>
-                <div class="bug-item" onclick="selectBug(this, 'FC DELAYING')">
+                <div class="bug-item" onclick="selectBug(this, 'FC DELAYING', 'whatsapp')">
                     <i class="fas fa-clock"></i>
                     <span>FC DELAYING</span>
                 </div>
-                <div class="bug-item" onclick="selectBug(this, 'SPAM_CALL')">
+                <div class="bug-item" onclick="selectBug(this, 'SPAM_CALL', 'whatsapp')">
                     <i class="fas fa-phone-alt"></i>
                     <span>SPAM_CALL</span>
                 </div>
-                <div class="bug-item" onclick="selectBug(this, 'UI_DELETE')">
+                <div class="bug-item" onclick="selectBug(this, 'UI_DELETE', 'whatsapp')">
                     <i class="fas fa-trash-alt"></i>
                     <span>UI_DELETE</span>
                 </div>
             </div>
 
-            <!-- Bottom Selector -->
+            <!-- Bug Grid untuk Group (hidden by default) -->
+            <div class="bug-grid" id="bugGridGroup" style="display: none;">
+                <div class="bug-item active" onclick="selectBug(this, 'gc_bug', 'group')">
+                    <i class="fas fa-users"></i>
+                    <span>gc_bug</span>
+                </div>
+                <div class="bug-item" onclick="selectBug(this, 'bugallmem', 'group')">
+                    <i class="fas fa-user-friends"></i>
+                    <span>bugallmem</span>
+                </div>
+                <div class="bug-item" onclick="selectBug(this, 'buggcganas', 'group')">
+                    <i class="fas fa-fire"></i>
+                    <span>buggcganas</span>
+                </div>
+            </div>
+
+            <!-- Bottom Selector (berubah) -->
             <div class="bottom-selector">
                 <div class="selector-left">
                     <i class="fas fa-eye-slash"></i>
@@ -631,7 +695,7 @@
         </div>
         <div class="alert-content">
             <div>
-                <div style="color:#888; margin-bottom:4px;">TARGET:</div>
+                <div style="color:#888; margin-bottom:4px;" id="alertTargetLabel">TARGET:</div>
                 <div class="alert-target" id="alertTarget"></div>
             </div>
             <div>
@@ -653,13 +717,65 @@
 
     <script>
         let alertTimeout;
+        let currentMode = 'whatsapp'; // 'whatsapp' or 'group'
+        let currentBug = 'X-Crashing';
+        let currentGroupBug = 'gc_bug';
 
-        function selectBug(element, bugName) {
-            document.querySelectorAll('.bug-item').forEach(item => {
-                item.classList.remove('active');
-            });
+        function switchMenu(mode) {
+            currentMode = mode;
+            
+            // Update menu active state
+            document.getElementById('menuWhatsapp').classList.toggle('active', mode === 'whatsapp');
+            document.getElementById('menuGroup').classList.toggle('active', mode === 'group');
+            
+            // Update title
+            document.getElementById('mainTitle').textContent = mode === 'whatsapp' ? 'X-GOJO BUG WHATSAPP' : 'X-GOJO BUG GROUP';
+            
+            // Update target label
+            document.getElementById('targetLabelText').textContent = mode === 'whatsapp' ? 'NOMOR TARGET' : 'GROUP URL TARGET';
+            document.getElementById('targetInput').placeholder = mode === 'whatsapp' ? '628XXXXXXXXXX' : 'https://chat.whatsapp.com/...';
+            
+            // Update video text
+            document.getElementById('videoText').textContent = mode === 'whatsapp' ? '⚡ X-GOJO MODE ⚡' : '⚡ X-GOJO GROUP MODE ⚡';
+            
+            // Show/hide bug grids
+            document.getElementById('bugGridWhatsapp').style.display = mode === 'whatsapp' ? 'flex' : 'none';
+            document.getElementById('bugGridGroup').style.display = mode === 'group' ? 'flex' : 'none';
+            
+            // Update bottom selector
+            if(mode === 'whatsapp') {
+                updateBottomSelectorWhatsapp(currentBug);
+            } else {
+                updateBottomSelectorGroup(currentGroupBug);
+            }
+        }
+
+        function selectBug(element, bugName, mode) {
+            // Remove active from all bugs in current mode
+            if(mode === 'whatsapp') {
+                document.querySelectorAll('#bugGridWhatsapp .bug-item').forEach(item => {
+                    item.classList.remove('active');
+                });
+                currentBug = bugName;
+            } else {
+                document.querySelectorAll('#bugGridGroup .bug-item').forEach(item => {
+                    item.classList.remove('active');
+                });
+                currentGroupBug = bugName;
+            }
+            
+            // Add active to clicked
             element.classList.add('active');
             
+            // Update bottom selector
+            if(mode === 'whatsapp') {
+                updateBottomSelectorWhatsapp(bugName);
+            } else {
+                updateBottomSelectorGroup(bugName);
+            }
+        }
+
+        function updateBottomSelectorWhatsapp(bugName) {
             const bottomText = document.getElementById('bottomSelectorText');
             const bottomRight = document.getElementById('bottomSelectorRight');
             
@@ -687,27 +803,64 @@
             }
         }
 
+        function updateBottomSelectorGroup(bugName) {
+            const bottomText = document.getElementById('bottomSelectorText');
+            const bottomRight = document.getElementById('bottomSelectorRight');
+            
+            switch(bugName) {
+                case 'gc_bug':
+                    bottomText.textContent = 'GC BUG MODE';
+                    bottomRight.textContent = 'gc';
+                    break;
+                case 'bugallmem':
+                    bottomText.textContent = 'ALL MEMBER BUG';
+                    bottomRight.textContent = 'all';
+                    break;
+                case 'buggcganas':
+                    bottomText.textContent = 'GC GANAS MODE';
+                    bottomRight.textContent = 'ganas';
+                    break;
+            }
+        }
+
         function validateAndSend() {
-            const target = document.getElementById('targetNumber').value.trim();
-            const activeBug = document.querySelector('.bug-item.active span').textContent;
+            const target = document.getElementById('targetInput').value.trim();
             
-            if(!target) {
-                alert('ISI NOMOR DULU BEGO!');
-                return;
+            // Validasi berdasarkan mode
+            if(currentMode === 'whatsapp') {
+                // Validasi nomor WhatsApp
+                if(!target) {
+                    alert('ISI NOMOR DULU BEGO!');
+                    return;
+                }
+                if(!target.startsWith('628')) {
+                    alert('INI BUKAN NOMOR BEGO TOLOL!');
+                    return;
+                }
+                if(target.length < 10 || target.length > 13) {
+                    alert('NOMOR GA VALID BEGO!');
+                    return;
+                }
+            } else {
+                // Validasi URL group
+                if(!target) {
+                    alert('ISI URL GROUP DULU BEGO!');
+                    return;
+                }
+                if(!target.startsWith('https://')) {
+                    alert('URL HARUS DIAWALI https:// BEGO!');
+                    return;
+                }
+                if(!target.includes('chat.whatsapp.com')) {
+                    alert('INI BUKAN LINK GROUP WA BEGO!');
+                    return;
+                }
             }
             
-            if(!target.startsWith('628')) {
-                alert('INI BUKAN NOMOR BEGO TOLOL!');
-                return;
-            }
-            
-            if(target.length < 10 || target.length > 13) {
-                alert('NOMOR GA VALID BEGO!');
-                return;
-            }
-            
+            // Tampilkan alert
+            document.getElementById('alertTargetLabel').textContent = currentMode === 'whatsapp' ? 'TARGET:' : 'GROUP URL:';
             document.getElementById('alertTarget').textContent = target;
-            document.getElementById('alertBug').textContent = activeBug;
+            document.getElementById('alertBug').textContent = currentMode === 'whatsapp' ? currentBug : currentGroupBug;
             document.getElementById('alertStatus').textContent = 'PROCESSING...';
             document.getElementById('alertStatus').className = 'alert-status';
             
@@ -733,4 +886,4 @@
         });
     </script>
 </body>
-    </html>
+                        </html>
