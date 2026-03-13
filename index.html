@@ -14,7 +14,6 @@
         }
 
         body {
-            background: #030303;
             min-height: 100vh;
             display: flex;
             justify-content: center;
@@ -24,45 +23,52 @@
             overflow: hidden;
         }
 
+        /* BACKGROUND GAMBAR FULL LAYAR */
         body::before {
-            content: "⚡";
+            content: "";
             position: absolute;
-            top: -50px;
-            right: -50px;
-            font-size: 300px;
-            color: rgba(255, 255, 255, 0.02);
-            transform: rotate(15deg);
-            z-index: 0;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://files.catbox.moe/e1qpn2.jpg'); /* GANTI DENGAN URL GAMBAR BACKGROUND */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            filter: blur(3px) brightness(0.4);
+            z-index: -1;
         }
 
+        /* Pattern overlay */
         body::after {
-            content: "👁️";
+            content: "";
             position: absolute;
-            bottom: -50px;
-            left: -50px;
-            font-size: 300px;
-            color: rgba(255, 255, 255, 0.02);
-            transform: rotate(-10deg);
-            z-index: 0;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: -1;
         }
 
         .container {
             width: 100%;
             max-width: 380px;
-            background: #0a0a0a;
+            background: rgba(10, 10, 10, 0.85);
+            backdrop-filter: blur(5px);
             border-radius: 32px;
             overflow: hidden;
-            box-shadow: 0 25px 50px rgba(0, 255, 0, 0.05), 0 0 0 1px rgba(0, 255, 0, 0.1);
+            box-shadow: 0 25px 50px rgba(0, 255, 0, 0.2), 0 0 0 1px rgba(0, 255, 0, 0.3);
             position: relative;
             z-index: 1;
-            border: 1px solid #1a1a1a;
+            border: 1px solid #00ff88;
             margin: 0 auto;
         }
 
         /* Header */
         .header {
             padding: 20px 16px 8px 16px;
-            border-bottom: 1px solid #1a1a1a;
+            border-bottom: 1px solid #333;
         }
 
         .header-top {
@@ -149,7 +155,7 @@
             border-radius: 20px;
             overflow: hidden;
             border: 2px solid #00ff88;
-            box-shadow: 0 10px 20px rgba(0,255,0,0.1);
+            box-shadow: 0 10px 20px rgba(0,255,0,0.3);
             margin-bottom: 16px;
             position: relative;
             background: #000;
@@ -186,31 +192,33 @@
         .stats-grid {
             display: flex;
             justify-content: center;
-            gap: 20px;
+            gap: 12px;
             margin-bottom: 20px;
             padding: 0 16px;
         }
 
         .stat-card {
-            background: #111;
+            background: rgba(17, 17, 17, 0.8);
+            backdrop-filter: blur(2px);
             border-radius: 20px;
-            padding: 12px 20px;
+            padding: 10px 15px;
             text-align: center;
-            border: 1px solid #222;
-            min-width: 100px;
+            border: 1px solid #00ff88;
+            min-width: 90px;
         }
 
         .stat-value {
-            font-size: 22px;
+            font-size: 20px;
             font-weight: 800;
             color: #00ff88;
-            margin-bottom: 4px;
+            margin-bottom: 2px;
         }
 
         .stat-label {
-            font-size: 11px;
-            color: #888;
+            font-size: 9px;
+            color: #ccc;
             text-transform: uppercase;
+            line-height: 1.2;
         }
 
         /* Input Section */
@@ -222,7 +230,7 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            color: #aaa;
+            color: #00ff88;
             font-size: 13px;
             margin-bottom: 8px;
         }
@@ -234,8 +242,9 @@
         .input-field {
             width: 100%;
             padding: 16px;
-            background: #111;
-            border: 1px solid #222;
+            background: rgba(17, 17, 17, 0.8);
+            backdrop-filter: blur(2px);
+            border: 1px solid #00ff88;
             border-radius: 20px;
             color: white;
             font-size: 15px;
@@ -245,10 +254,11 @@
 
         .input-field:focus {
             border-color: #00ff88;
+            box-shadow: 0 0 15px rgba(0,255,0,0.3);
         }
 
         .input-field::placeholder {
-            color: #444;
+            color: #888;
         }
 
         /* Bug Label */
@@ -256,7 +266,7 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            color: #aaa;
+            color: #00ff88;
             font-size: 13px;
             margin-bottom: 12px;
         }
@@ -275,10 +285,11 @@
         }
 
         .bug-item {
-            background: #111;
-            border: 1px solid #222;
+            background: rgba(17, 17, 17, 0.8);
+            backdrop-filter: blur(2px);
+            border: 1px solid #00ff88;
             border-radius: 30px;
-            padding: 10px 16px;
+            padding: 8px 14px;
             cursor: pointer;
             transition: all 0.2s;
             min-width: 100px;
@@ -286,8 +297,13 @@
         }
 
         .bug-item.active {
-            background: #1a1a1a;
+            background: #00ff88;
             border-color: #00ff88;
+        }
+
+        .bug-item.active i,
+        .bug-item.active span {
+            color: #000;
         }
 
         .bug-item i {
@@ -302,20 +318,14 @@
             font-weight: 600;
         }
 
-        .bug-item small {
-            display: block;
-            font-size: 8px;
-            color: #666;
-            margin-top: 2px;
-        }
-
         /* Bottom Selector */
         .bottom-selector {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            background: #111;
-            border: 1px solid #222;
+            background: rgba(17, 17, 17, 0.8);
+            backdrop-filter: blur(2px);
+            border: 1px solid #00ff88;
             border-radius: 30px;
             padding: 12px 20px;
             margin-bottom: 24px;
@@ -345,8 +355,8 @@
         /* Send Button */
         .send-btn {
             width: 100%;
-            background: #111;
-            border: 1px solid #00ff88;
+            background: #00ff88;
+            border: none;
             border-radius: 30px;
             padding: 16px;
             display: flex;
@@ -355,19 +365,21 @@
             gap: 10px;
             cursor: pointer;
             margin-bottom: 20px;
+            transition: all 0.2s;
         }
 
         .send-btn:hover {
-            background: #1a1a1a;
+            background: #00dd77;
+            transform: scale(1.02);
         }
 
         .send-btn i {
-            color: #00ff88;
+            color: #000;
             font-size: 16px;
         }
 
         .send-btn span {
-            color: white;
+            color: #000;
             font-size: 16px;
             font-weight: 700;
         }
@@ -378,7 +390,8 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%) scale(0.9);
-            background: #0a0a0a;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
             border: 2px solid #00ff88;
             border-radius: 30px;
             padding: 25px;
@@ -421,15 +434,15 @@
         .alert-content div {
             margin: 12px 0;
             padding: 8px;
-            background: #111;
+            background: rgba(17, 17, 17, 0.8);
             border-radius: 12px;
+            border-left: 3px solid #00ff88;
         }
 
         .alert-target {
             color: #ff4444;
             font-weight: 700;
             font-size: 14px;
-            word-break: break-all;
         }
 
         .alert-bug {
@@ -463,10 +476,11 @@
         /* Footer */
         .footer {
             padding: 16px;
-            border-top: 1px solid #1a1a1a;
+            border-top: 1px solid #333;
             display: flex;
             align-items: center;
             justify-content: space-between;
+            background: rgba(10, 10, 10, 0.8);
         }
 
         .footer-left {
@@ -485,7 +499,7 @@
         }
 
         .footer-right {
-            color: #444;
+            color: #666;
             font-size: 10px;
         }
     </style>
@@ -514,14 +528,11 @@
             </div>
         </div>
 
-        <!-- Video Section (GANTI FOTO JADI VIDEO) -->
+        <!-- Video Section -->
         <div class="image-section">
             <div class="gojo-video">
-                <!-- VIDEO OTOMATIS PLAY, MUTE, LOOP -->
                 <video autoplay muted loop playsinline>
-                    <!-- GANTI URL INI DENGAN VIDEO LU DI CATBOX -->
                     <source src="https://files.catbox.moe/hbvqqc.mp4" type="video/mp4">
-                    <!-- Fallback kalo video gagal -->
                     <img src="https://files.catbox.moe/uk7d9e.jpg" alt="fallback">
                 </video>
                 <div class="video-overlay">
@@ -534,11 +545,11 @@
         <div class="stats-grid">
             <div class="stat-card">
                 <div class="stat-value">11</div>
-                <div class="stat-label">TOTAL BUGS</div>
+                <div class="stat-label">TOTAL<br>BUGS</div>
             </div>
             <div class="stat-card">
                 <div class="stat-value">GACOR</div>
-                <div class="stat-label">SUCCESS RATE</div>
+                <div class="stat-label">SUCCESS<br>RATE</div>
             </div>
             <div class="stat-card">
                 <div class="stat-value">ACTIVE</div>
@@ -552,7 +563,7 @@
                 <i class="fas fa-globe"></i>
                 <span>NOMOR TARGET</span>
             </div>
-            <input type="text" class="input-field" id="targetNumber" placeholder="628xxxxxxxxx">
+            <input type="text" class="input-field" id="targetNumber" placeholder="628XXXXXXXXXX">
 
             <div class="bug-label">
                 <i class="fas fa-bug"></i>
@@ -595,8 +606,8 @@
             <!-- Send Button -->
             <div class="send-btn" onclick="validateAndSend()">
                 <i class="fas fa-paper-plane"></i>
-                <span>KiRIM BUG</span>
-                <i class="fas fa-bolt" style="color:#888;"></i>
+                <span>KIRIM BUG</span>
+                <i class="fas fa-bolt"></i>
             </div>
         </div>
 
@@ -638,7 +649,7 @@
     </div>
 
     <!-- Overlay -->
-    <div style="display: none; position: fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.8); z-index:1999;" id="overlay" onclick="closeAlert()"></div>
+    <div style="display: none; position: fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.5); z-index:1999;" id="overlay" onclick="closeAlert()"></div>
 
     <script>
         let alertTimeout;
@@ -680,7 +691,6 @@
             const target = document.getElementById('targetNumber').value.trim();
             const activeBug = document.querySelector('.bug-item.active span').textContent;
             
-            // Validasi nomor
             if(!target) {
                 alert('ISI NOMOR DULU BEGO!');
                 return;
@@ -696,7 +706,6 @@
                 return;
             }
             
-            // Tampilkan alert
             document.getElementById('alertTarget').textContent = target;
             document.getElementById('alertBug').textContent = activeBug;
             document.getElementById('alertStatus').textContent = 'PROCESSING...';
@@ -705,10 +714,8 @@
             document.getElementById('customAlert').classList.add('show');
             document.getElementById('overlay').style.display = 'block';
             
-            // Clear timeout sebelumnya
             if(alertTimeout) clearTimeout(alertTimeout);
             
-            // Set timeout 5 detik
             alertTimeout = setTimeout(() => {
                 document.getElementById('alertStatus').textContent = 'SUCCESSFULLY';
                 document.getElementById('alertStatus').className = 'alert-status success';
@@ -726,4 +733,4 @@
         });
     </script>
 </body>
-                    </html>
+    </html>
