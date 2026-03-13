@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>X-GOJO BUG WHATSAPP</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Poppins', -apple-system, sans-serif;
+        }
+
+        body {
+            background: #000000;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 16px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Background Pattern - Gojo Theme */
+        body::before {
+            content: "⚡";
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            font-size: 300px;
+            color: rgba(255, 255, 255, 0.02);
+            transform: rotate(15deg);
+            z-index: 0;
+        }
+
+        body::after {
+            content: "👁️";
+            position: absolute;
+            bottom: -50px;
+            left: -50px;
+            font-size: 300px;
+            color: rgba(255, 255, 255, 0.02);
+            transform: rotate(-10deg);
+            z-index: 0;
+        }
+
+        /* Gojo eyes pattern */
+        .gojo-pattern {
+            position: absolute;
+            top: 20%;
+            left: 10%;
+            font-size: 120px;
+            color: rgba(255, 255, 255, 0.02);
+            transform: rotate(5deg);
+            z-index: 0;
+        }
+
+        .gojo-pattern-2 {
+            position: absolute;
+            bottom: 20%;
+            right: 10%;
+            font-size: 150px;
+            color: rgba(255, 255, 255, 0.02);
+            transform: rotate(-8deg);
+            z-index: 0;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 400px;
+            background: #111111;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(255, 255, 255, 0.05), 0 0 0 1px rgba(255,255,255,0.1);
+            position: relative;
+            z-index: 1;
+            border: 1px solid #333;
+        }
+
+        /* Header */
+        .header {
+            padding: 20px 16px 8px 16px;
+            border-bottom: 1px solid #222;
+        }
+
+        .header-top {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .shield-icon {
+            width: 28px;
+            height: 28px;
+            background: #222;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 14px;
+            border: 1px solid #444;
+        }
+
+        .header-top h1 {
+            font-size: 18px;
+            font-weight: 600;
+            color: white;
+            letter-spacing: -0.2px;
+        }
+
+        .header-sub {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+        }
+
+        .header-sub .left {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .header-sub .left span {
+            color: #888;
+            font-size: 14px;
+        }
+
+        .header-sub .right {
+            color: #00ff88;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        /* Stats Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .stat-card {
+            background: #1a1a1a;
+            border-radius: 16px;
+            padding: 14px 8px;
+            text-align: center;
+            border: 1px solid #333;
+        }
+
+        .stat-value {
+            font-size: 22px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 4px;
+        }
+
+        .stat-label {
+            font-size: 11px;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        /* Input Section */
+        .input-section {
+            padding: 0 16px 16px 16px;
+        }
+
+        .input-label {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: #aaa;
+            font-size: 13px;
+            margin-bottom: 6px;
+        }
+
+        .input-label i {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 16px;
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 14px;
+            color: white;
+            font-size: 15px;
+            margin-bottom: 20px;
+            outline: none;
+        }
+
+        .input-field:focus {
+            border-color: #666;
+        }
+
+        .input-field::placeholder {
+            color: #555;
+        }
+
+        /* Bug Selector */
+        .bug-label {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: #aaa;
+            font-size: 13px;
+            margin-bottom: 10px;
+        }
+
+        .bug-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin-bottom: 24px;
+        }
+
+        .bug-item {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 30px;
+            padding: 10px 6px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .bug-item.active {
+            background: #333;
+            border-color: #666;
+        }
+
+        .bug-item i {
+            display: block;
+            color: #888;
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+
+        .bug-item span {
+            font-size: 11px;
+            color: #ccc;
+            font-weight: 500;
+        }
+
+        .bug-item small {
+            display: block;
+            font-size: 8px;
+            color: #666;
+            margin-top: 2px;
+        }
+
+        /* Bottom Selector (invisible etc) */
+        .bottom-selector {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 30px;
+            padding: 8px 16px;
+            margin-bottom: 24px;
+        }
+
+        .selector-left {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .selector-left i {
+            color: #888;
+            font-size: 14px;
+        }
+
+        .selector-left span {
+            color: #ccc;
+            font-size: 13px;
+        }
+
+        .selector-right {
+            color: #00ff88;
+            font-size: 13px;
+        }
+
+        /* Send Button */
+        .send-btn {
+            width: 100%;
+            background: #2a2a2a;
+            border: 1px solid #444;
+            border-radius: 30px;
+            padding: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-bottom: 20px;
+        }
+
+        .send-btn:hover {
+            background: #333;
+            border-color: #666;
+        }
+
+        .send-btn i {
+            color: #00ff88;
+            font-size: 16px;
+        }
+
+        .send-btn span {
+            color: white;
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        /* Footer */
+        .footer {
+            padding: 16px;
+            border-top: 1px solid #222;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .footer-left {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer-left i {
+            color: #444;
+            font-size: 14px;
+        }
+
+        .footer-left span {
+            color: #666;
+            font-size: 12px;
+        }
+
+        .footer-right {
+            color: #444;
+            font-size: 10px;
+        }
+
+        /* Gojo Logo */
+        .gojo-logo {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 180px;
+            color: rgba(255, 255, 255, 0.01);
+            white-space: nowrap;
+            z-index: 0;
+            pointer-events: none;
+            font-weight: 900;
+            letter-spacing: 10px;
+        }
+
+        /* Responsive */
+        @media (max-width: 380px) {
+            .bug-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .stat-value {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Gojo Pattern -->
+    <div class="gojo-pattern">👁️⚡👁️</div>
+    <div class="gojo-pattern-2">⚡👁️⚡</div>
+    <div class="gojo-logo">GOJO</div>
+
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="header-top">
+                <div class="shield-icon">
+                    <i class="fas fa-shield-alt" style="font-size: 14px;"></i>
+                </div>
+                <h1>X-GOJO BUG WHATSAPP</h1>
+            </div>
+            <div class="header-sub">
+                <div class="left">
+                    <span>X-GOJO</span>
+                    <span>•</span>
+                    <span style="color:#00ff88;">FULLUP</span>
+                </div>
+                <div class="right">
+                    ⚡
+                </div>
+            </div>
+        </div>
+
+        <!-- Stats -->
+        <div style="padding: 0 16px;">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value">11</div>
+                    <div class="stat-label">Total Bugs</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">GACOR</div>
+                    <div class="stat-label">Success Rate</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">ACTIVE</div>
+                    <div class="stat-label">Status</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Input Section -->
+        <div class="input-section">
+            <!-- Nomor Target -->
+            <div class="input-label">
+                <i class="fas fa-globe"></i>
+                <span>NOMOR TARGET</span>
+            </div>
+            <input type="text" class="input-field" placeholder="62xxxxxxxxx" value="62xxxxxxxxx">
+
+            <!-- Pilih Bug Label -->
+            <div class="bug-label">
+                <i class="fas fa-bug"></i>
+                <span>PILIH BUG</span>
+            </div>
+
+            <!-- Bug Grid -->
+            <div class="bug-grid">
+                <div class="bug-item active" onclick="selectBug(this, 'X-Crashing')">
+                    <i class="fas fa-bolt"></i>
+                    <span>X-Crashing</span>
+                    <small>50% work</small>
+                </div>
+                <div class="bug-item" onclick="selectBug(this, 'X-Gojo')">
+                    <i class="fas fa-eye"></i>
+                    <span>X-Gojo</span>
+                    <small>fcotax</small>
+                </div>
+                <div class="bug-item" onclick="selectBug(this, 'FC DELAYING')">
+                    <i class="fas fa-clock"></i>
+                    <span>FC DELAYING</span>
+                    <small>DELAY</small>
+                </div>
+                <div class="bug-item" onclick="selectBug(this, 'SPAM_CALL')">
+                    <i class="fas fa-phone-alt"></i>
+                    <span>SPAM_CALL</span>
+                    <small>spam</small>
+                </div>
+                <div class="bug-item" onclick="selectBug(this, 'UI_DELETE')">
+                    <i class="fas fa-trash-alt"></i>
+                    <span>UI_DELETE</span>
+                    <small>delete</small>
+                </div>
+            </div>
+
+            <!-- Bottom Selector (invisible) -->
+            <div class="bottom-selector">
+                <div class="selector-left">
+                    <i class="fas fa-eye-slash"></i>
+                    <span>FC iNVisiBiE</span>
+                </div>
+                <div class="selector-right">
+                    invisible
+                </div>
+            </div>
+
+            <!-- Kirim Bug Button -->
+            <div class="send-btn" onclick="sendBug()">
+                <i class="fas fa-paper-plane"></i>
+                <span>KiRIM BUG</span>
+                <i class="fas fa-bolt" style="color:#888;"></i>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <div class="footer-left">
+                <i class="fas fa-bolt"></i>
+                <span>X-GOJO TEAM</span>
+            </div>
+            <div class="footer-right">
+                © 2026 X-GOJO. Always For You
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Select bug function
+        function selectBug(element, bugName) {
+            // Remove active from all
+            document.querySelectorAll('.bug-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // Add active to clicked
+            element.classList.add('active');
+            
+            // Update bottom selector text based on selection
+            const bottomSelector = document.querySelector('.selector-left span');
+            const bottomRight = document.querySelector('.selector-right');
+            
+            switch(bugName) {
+                case 'X-Crashing':
+                    bottomSelector.textContent = 'FC iNVisiBiE';
+                    bottomRight.textContent = 'invisible';
+                    break;
+                case 'X-Gojo':
+                    bottomSelector.textContent = 'X-Gojo Mode';
+                    bottomRight.textContent = 'fcotax';
+                    break;
+                case 'FC DELAYING':
+                    bottomSelector.textContent = 'DELAY iNVisiBiE';
+                    bottomRight.textContent = 'DELAY';
+                    break;
+                case 'SPAM_CALL':
+                    bottomSelector.textContent = 'SPAM CALL';
+                    bottomRight.textContent = 'spam';
+                    break;
+                case 'UI_DELETE':
+                    bottomSelector.textContent = 'UI DELETE';
+                    bottomRight.textContent = 'delete';
+                    break;
+                default:
+                    bottomSelector.textContent = 'FC iNVisiBiE';
+                    bottomRight.textContent = 'invisible';
+            }
+        }
+
+        // Send bug function
+        function sendBug() {
+            const targetNumber = document.querySelector('.input-field').value;
+            const activeBug = document.querySelector('.bug-item.active span').textContent;
+            
+            if(!targetNumber || targetNumber === '62xxxxxxxxx') {
+                alert('ISI NOMOR TARGET DULU GOBLOK!');
+                return;
+            }
+            
+            alert(`🚀 BUG SENT!\n\nTarget: ${targetNumber}\nBug Type: ${activeBug}\nStatus: PROCESSING...`);
+            
+            // Animate button
+            const btn = document.querySelector('.send-btn');
+            btn.style.transform = 'scale(0.98)';
+            setTimeout(() => {
+                btn.style.transform = 'scale(1)';
+            }, 200);
+        }
+
+        // Auto update stats (just for show)
+        setInterval(() => {
+            const totalBugs = document.querySelector('.stat-value');
+            // Random animation biar keliatan hidup
+            if(Math.random() > 0.7) {
+                totalBugs.style.transform = 'scale(1.1)';
+                setTimeout(() => {
+                    totalBugs.style.transform = 'scale(1)';
+                }, 200);
+            }
+        }, 3000);
+    </script>
+</body>
+</html>
